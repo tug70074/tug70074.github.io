@@ -1,0 +1,23 @@
+{
+  "name": "tug70074.github.io",
+  "version": "1.0.0",
+  "description": "testing pwa",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tug70074/tug70074.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tug70074/tug70074.github.io/issues"
+  },
+  "homepage": "https://github.com/tug70074/tug70074.github.io#readme",
+  "dependencies": {
+    "axios": "^0.21.0"
+  }
+}

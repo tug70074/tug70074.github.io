@@ -1,7 +1,10 @@
-const fetch = require('isomorphic-fetch');
-console.log("helloworld");
-(async () => {
-	const response = await fetch('https://example.com');
-	const text = await response.text();
-	console.log(text.match(/(?<=\<h1>).*(?=\<\/h1>)/));
-  })()
+const axios = require('axios')
+
+axios
+	.get('https://www.reddit.com/r/programming.json')
+	.then((response) => {
+		console.log(response)
+	})
+	.catch((error) => {
+		console.error(error)
+	});
