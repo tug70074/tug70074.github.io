@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 axios
-	.get('https://www.reddit.com/r/programming.json')
+	.get('https://www.scrapingbee.com/blog/web-scraping-javascript/')
 	.then((response) => {
 		console.log(response)
 	})
