@@ -1,11 +1,25 @@
-const axios = require('axios')
+const axios = require('axios');
+const cheerio = require('cheerio');
 
-axios
-	.get('https://www.scrapingbee.com/blog/web-scraping-javascript/')
-	.then((response) => {
-		console.log("Here is the response from the Url : ")
-		console.log(response)
-	})
-	.catch((error) => {
-		console.error(error)
-	});
+const getPostTitles = async () => {
+	try {
+		const { data } = await axios.get(
+			'https://old.reddit.com/r/programming/'
+		);
+		const $ = cheerio.load(data);
+		const postTitles = [];
+
+		$('div > p.title > a').each((_idx, el) => {
+			const postTitle = $(el).text()
+			postTitles.push(postTitle)
+		});
+
+		return postTitles;
+	} catch (error) {
+		throw error;
+	}
+};
+
+console.log("here is the returned response");
+getPostTitles()
+.then((postTitles) => console.log(postTitles));
