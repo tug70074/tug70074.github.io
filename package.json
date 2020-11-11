@@ -19,6 +19,11 @@
   "homepage": "https://github.com/tug70074/tug70074.github.io#readme",
   "dependencies": {
     "axios": "^0.21.0",
-    "cheerio": "^1.0.0-rc.3"
+    "cheerio": "^1.0.0-rc.3",
+    "jquery": "^3.5.1",
+    "jquery-migrate": "^3.3.1",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "uniq": "^1.0.1"
   }
 }

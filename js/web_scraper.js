@@ -1,25 +1,25 @@
-const axios = require('axios');
+const request = require('request');
 const cheerio = require('cheerio');
 
-const getPostTitles = async () => {
-	try {
-		const { data } = await axios.get(
-			'https://old.reddit.com/r/programming/'
-		);
-		const $ = cheerio.load(data);
-		const postTitles = [];
-
-		$('div > p.title > a').each((_idx, el) => {
-			const postTitle = $(el).text()
-			postTitles.push(postTitle)
-		});
-
-		return postTitles;
-	} catch (error) {
-		throw error;
+request('https://www.opendataphilly.org/dataset/covid-hospitalizations/resource/be0f3aa9-c4d5-461d-ac55-245872de69ba', (error, response, html) => {
+	if(!error && response.statusCode == 200) { //200 means successfful http response
+		//console.log(html);
+		const $ = cheerio.load(html);
+		
+		const resourceURLAnalytics = $('.resource-url-analytics').attr('href');
+		console.log(resourceURLAnalytics);
+		//const csvLink = "http://websitescraper.herokuapp.com/?url=" + resourceURLAnalytics + "&callback=jsCallback";
+		fetchCSVfile(resourceURLAnalytics);
+		
 	}
-};
+});
 
-console.log("here is the returned response");
-getPostTitles()
-.then((postTitles) => console.log(postTitles));
+function fetchCSVfile(resourceURL) {
+	jQuery.ajax({ 
+		type: "GET", 
+		url: resourceURL, 
+		dataType: "text", 
+		success: function(data) {console.log(data);} 
+	}); 
+}
+
