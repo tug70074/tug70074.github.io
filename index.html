@@ -3,19 +3,33 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Hello World</title>
+  <title>Covid Resource App</title>
   <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="icons/apple.png">
   <meta name="theme-color" content="#FFE1C4">
-  <script src="/js/csvToArray.v2.1.js"></script>
-  <script src="/js/jquery-3.5.1.js"></script>
+  <script src="js/csvToArray.v2.1.js"></script>
+  <script src="js/jquery-3.5.1.js"></script>
 <body class="fullscreen">
   <div class="container">
-    <h1 class="title">Hello World!</h1>
+
+    <h1 class="title">Covid Resource App [Data]</h1>
+    <h2 class="title2">Server Side Back-End Sandbox by Steve and Joel</h2>
+
+    <h4 class="title3">Data</h4>
+    URL : <a href="https://www.opendataphilly.org/dataset/covid-hospitalizations/resource/be0f3aa9-c4d5-461d-ac55-245872de69ba">
+      https://www.opendataphilly.org/dataset/covid-hospitalizations/resource/be0f3aa9-c4d5-461d-ac55-245872de69ba</a>
+    <br></br>
+    <table id="covid_data_example">
+      <tr>
+        <th>Time Stamp</th>
+        <th>Count</th>
+        <th>Hospitalized</th>
+        <th>Date</th>
+      </tr>
+    </table>
   </div>
-    <script src="/js/app.js"></script>
-    <script src="/js/bundle.js"></script>
+    <script src="js/bundle.js"></script>
 </body>
 </html>
