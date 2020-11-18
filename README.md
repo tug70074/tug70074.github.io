@@ -1,2 +1,3 @@
-# thuc753951.github.io
+# tug70074
+.github.io
 testing pwa
