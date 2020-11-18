@@ -116,7 +116,7 @@ function injectFunction(num){
         case 1:
             jQuery.ajax({ 
                 type: "GET", 
-                url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_date ORDER BY date", 
+                url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_date ORDER BY date DESC", 
                 dataType: "json", 
                 success: function(data) {
                     var rows = data.rows;
