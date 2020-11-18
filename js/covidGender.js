@@ -27,7 +27,7 @@ jQuery.ajax({
 			}
 		});
 		console.log("male = " + male); 
-		console.log("female = " + female); 
+		console.log("female = " + male); 
 	}
 	
 }); 
