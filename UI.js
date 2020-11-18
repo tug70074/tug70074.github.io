@@ -136,11 +136,6 @@ function injectFunction(num){
                         else   
                             data2.push(element.count)
                     });
-                    for (var i = 0; i < 200; i++) {
-                        xAxisData.push('Month' + i);
-                        data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
-                        data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
-                    }
 
                     var option = {
                         title: {
@@ -171,14 +166,14 @@ function injectFunction(num){
                         yAxis: {
                         },
                         series: [{
-                            name: 'bar',
+                            name: 'Hospitlized',
                             type: 'bar',
                             data: data1,
                             animationDelay: function (idx) {
                                 return idx * 10;
                             }
                         }, {
-                            name: 'bar2',
+                            name: 'Not Hospitlized',
                             type: 'bar',
                             data: data2,
                             animationDelay: function (idx) {
