@@ -212,7 +212,7 @@ function Covid_Gender_inject(){//////////////////Look here to insert the pie cha
 };
 
 function Covid_Timeline_inject(){//////////////////Look here to insert the pie chart
-    var content = '<div id="echarts-timeline" style="width: 1000px;height:400px;"></div>'; //fix width to be container
+    var content = '<div id="echarts-timeline" style="width: 100%;height:400px;"></div>'; //fix width to be container
    
     return content;
 };
