@@ -127,9 +127,9 @@ function injectFunction(num){
                     var data2 = [];
                     console.log(data["rows"]);
                     data["rows"].forEach(element => {
-                        var date = element.date.substring(0,10);
-                        if (!xAxisData.includes(date)) //if the next row is the same date as previous but just
-                            xAxisData.push(date);
+                        var date = element.date;
+                        if (!xAxisData.includes(date) && (date != null)) //if the next row is the same date as previous but just
+                            xAxisData.push(date.substring(0,10));
 
                         if (element.hospitalized === "Yes") 
                             data1.push(element.count);
