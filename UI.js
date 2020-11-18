@@ -116,14 +116,25 @@ function injectFunction(num){
         case 1:
             jQuery.ajax({ 
                 type: "GET", 
-                url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_date", 
+                url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_date ORDER BY date", 
                 dataType: "json", 
                 success: function(data) {
+                    var rows = data.rows;
                 
                     var timelineChart = echarts.init(document.getElementById("echarts-timeline"));
                     var xAxisData = [];
                     var data1 = [];
                     var data2 = [];
+                    rows.forEach(element => {
+                        var date = element.date.substring(0,10);
+                        if (!xAxisData.includes(date)) //if the next row is the same date as previous but just
+                            xAxisData.push(date);
+
+                        if (element.hospitalized === "Yes") 
+                            data1.push(element.count);
+                        else   
+                            data2.push(element.count)
+                    });
                     for (var i = 0; i < 200; i++) {
                         xAxisData.push('Month' + i);
                         data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
@@ -205,7 +216,7 @@ function Covid_Gender_inject(){//////////////////Look here to insert the pie cha
 };
 
 function Covid_Timeline_inject(){//////////////////Look here to insert the pie chart
-    var content = '<div id="echarts-timeline" style="width: 1000px;height:400px;"></div>';
+    var content = '<div id="echarts-timeline" style="width: 1000px;height:400px;"></div>'; //fix width to be container
    
     return content;
 };
