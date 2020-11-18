@@ -1,3 +1,5 @@
+const echarts = require('echarts');
+
 let data;
 (function getInfo(){
     let requestURL = "test_data.json";
@@ -45,7 +47,7 @@ function injectFunction(num){
     var inject = document.getElementsByClassName("txtSection")[0];
     switch(num){
         case 0:
-            content = Covid_Gender_inject();
+            //content = Covid_Gender_inject();
             break;
         case 1:
             content = Covid_Timeline_inject();
@@ -67,7 +69,7 @@ function injectFunction(num){
     inject.innerHTML = content;
 
     switch(num){
-        case 0:
+        /*case 0:
             jQuery.ajax({ 
                 type: "GET", 
                 url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_sex", 
@@ -112,7 +114,7 @@ function injectFunction(num){
                     console.log("female = " + female); 
                 }
             });
-            break;
+            break;*/
         case 1:
             jQuery.ajax({ 
                 type: "GET", 
