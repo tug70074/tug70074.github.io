@@ -60,13 +60,53 @@ function injectFunction(num){
 }
 
 function feature1_inject(){
-    var content = `
-        <image class="modalImage" src="/images/presentation.png"></image>
-        <div id = "injectID" class="injectContent">
-        </div>
-    `;
+    var male = 0;
+    var female = 0; 
+    jQuery.ajax({ 
+        type: "GET", 
+        url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_sex", 
+        dataType: "json", 
+        success: function(data) {
+            console.log(data);
+            var rows = data.rows;
 
-    document.getElementsByClassName("injectContent").innerHTML = data["case 1"]["count"];
+            rows.forEach(element => {
+                switch (element["cartodb_id"]) {
+                    case 1:
+                        male += element.count;
+                        break;
+                    case 2:
+                        female += element.count;
+                        break;
+                    case 3:
+                        male += element.count;
+                        break;
+                    case 4:
+                        female += element.count;
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+            console.log("male = " + male); 
+            console.log("female = " + female); 
+        }
+
+    });
+    var content = '<canvas id="chartjs-4" class="chartjs" width="250" height="125" style="display: block; width: 250px; height: 125px;"></canvas>';
+    var ctx=document.getElementById("chartjs-4").getContext("2d")
+    var myChart= new Chart(ctx,
+    {"type":"doughnut",
+    "data":{
+      "labels":[
+        "Male","Female"],
+      "datasets":[{
+        "label":"My First Dataset",
+      "data":[150,50],"backgroundColor":[
+      "rgb(255, 99, 132)",
+      "rgb(54, 162, 235)",
+      "rgb(255, 205, 86)"]}]}});
 
     return content;
 };

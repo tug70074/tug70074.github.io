@@ -1,7 +1,7 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
-request('https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_sex', (error, response, html) => {
+request('https://www.opendataphilly.org/dataset/covid-hospitalizations/resource/be0f3aa9-c4d5-461d-ac55-245872de69ba', (error, response, html) => {
 	if(!error && response.statusCode == 200) { //200 means successfful http response
 		//console.log(html);
 		const $ = cheerio.load(html);

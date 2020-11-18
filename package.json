@@ -19,6 +19,7 @@
   "homepage": "https://github.com/tug70074/tug70074.github.io#readme",
   "dependencies": {
     "axios": "^0.21.0",
+    "chart.js": "^2.9.4",
     "cheerio": "^1.0.0-rc.3",
     "jquery": "^3.5.1",
     "jquery-migrate": "^3.3.1",
