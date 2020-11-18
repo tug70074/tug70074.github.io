@@ -116,7 +116,7 @@ function injectFunction(num){
         case 1:
             jQuery.ajax({ 
                 type: "GET", 
-                url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_date ORDER BY date DESC", 
+                url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_date ORDER BY date", 
                 dataType: "json", 
                 success: function(data) {
                     var rows = data.rows;
@@ -136,7 +136,8 @@ function injectFunction(num){
                         else   
                             data2.push(element.count)
                     });
-
+                    console.log(data1);
+                    console.log(data2);
                     var option = {
                         title: {
                             text: 'Timeline Covid'
