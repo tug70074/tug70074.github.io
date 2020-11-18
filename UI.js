@@ -1,3 +1,5 @@
+const echarts = require('echarts');
+
 let data;
 (function getInfo(){
     let requestURL = "test_data.json";
