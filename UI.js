@@ -1,5 +1,3 @@
-const echarts = require('echarts');
-
 let data;
 (function getInfo(){
     let requestURL = "test_data.json";
@@ -121,66 +119,68 @@ function injectFunction(num){
                 url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_date", 
                 dataType: "json", 
                 success: function(data) {
-                    var timelineChart = echarts.init(document.getElementById("echarts-timeline"));
-                    var xAxisData = [];
-                    var data1 = [];
-                    var data2 = [];
-                    for (var i = 0; i < 200; i++) {
-                        xAxisData.push('Month' + i);
-                        data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
-                        data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
-                    }
-
-                    var option = {
-                        title: {
-                            text: 'Timeline Covid'
-                        },
-                        legend: {
-                            data: ['Hospitlized', 'Not Hospitlized']
-                        },
-                        toolbox: {
-                            // y: 'bottom',
-                            feature: {
-                                magicType: {
-                                    type: ['stack', 'tiled']
-                                },
-                                dataView: {},
-                                saveAsImage: {
-                                    pixelRatio: 2
-                                }
-                            }
-                        },
-                        tooltip: {},
-                        xAxis: {
-                            data: xAxisData,
-                            splitLine: {
-                                show: false
-                            }
-                        },
-                        yAxis: {
-                        },
-                        series: [{
-                            name: 'bar',
-                            type: 'bar',
-                            data: data1,
-                            animationDelay: function (idx) {
-                                return idx * 10;
-                            }
-                        }, {
-                            name: 'bar2',
-                            type: 'bar',
-                            data: data2,
-                            animationDelay: function (idx) {
-                                return idx * 10 + 100;
-                            }
-                        }],
-                        animationEasing: 'elasticOut',
-                        animationDelayUpdate: function (idx) {
-                            return idx * 5;
+                    require(['echarts'], function (echarts) {
+                        var timelineChart = echarts.init(document.getElementById("echarts-timeline"));
+                        var xAxisData = [];
+                        var data1 = [];
+                        var data2 = [];
+                        for (var i = 0; i < 200; i++) {
+                            xAxisData.push('Month' + i);
+                            data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
+                            data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
                         }
-                    };
-
-                    timelineChart.setOption(option);
+    
+                        var option = {
+                            title: {
+                                text: 'Timeline Covid'
+                            },
+                            legend: {
+                                data: ['Hospitlized', 'Not Hospitlized']
+                            },
+                            toolbox: {
+                                // y: 'bottom',
+                                feature: {
+                                    magicType: {
+                                        type: ['stack', 'tiled']
+                                    },
+                                    dataView: {},
+                                    saveAsImage: {
+                                        pixelRatio: 2
+                                    }
+                                }
+                            },
+                            tooltip: {},
+                            xAxis: {
+                                data: xAxisData,
+                                splitLine: {
+                                    show: false
+                                }
+                            },
+                            yAxis: {
+                            },
+                            series: [{
+                                name: 'bar',
+                                type: 'bar',
+                                data: data1,
+                                animationDelay: function (idx) {
+                                    return idx * 10;
+                                }
+                            }, {
+                                name: 'bar2',
+                                type: 'bar',
+                                data: data2,
+                                animationDelay: function (idx) {
+                                    return idx * 10 + 100;
+                                }
+                            }],
+                            animationEasing: 'elasticOut',
+                            animationDelayUpdate: function (idx) {
+                                return idx * 5;
+                            }
+                        };
+    
+                        timelineChart.setOption(option); 
+                    });
                 }
             });
             
