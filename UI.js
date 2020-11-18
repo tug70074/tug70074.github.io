@@ -126,6 +126,7 @@ function injectFunction(num){
                     var data1 = [];
                     var data2 = [];
                     console.log(data);
+                    console.log(data["rows"]);
                     rows.forEach(element => {
                         var date = element.date.substring(0,10);
                         if (!xAxisData.includes(date)) //if the next row is the same date as previous but just
