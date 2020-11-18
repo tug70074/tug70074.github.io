@@ -42,21 +42,37 @@ function injectFunction(num){
     switch(num){
         case 0:
             content = feature1_inject();
+            inject.innerHTML = content;
+            var ctx = document.getElementById("chartjs-4").getContext('2d');
+            var myChart= new Chart(ctx,
+            {"type":"doughnut",
+            "data":{
+            "labels":[
+                "Male","Female"],
+            "datasets":[{
+                "label":"My First Dataset",
+            "data":[150,50],"backgroundColor":[
+            "rgb(255, 99, 132)",
+            "rgb(54, 162, 235)",
+            "rgb(255, 205, 86)"]}]}});
             break;
         case 1:
             content = "THIS IS TEST FEATURE 2";
+            inject.innerHTML = content;
             break;
         case 2:
             content = "THIS IS TEST FEATURE 3";
+            inject.innerHTML = content;
             break;
         case 3:
             content = "THIS IS TEST FEATURE 4";
+            inject.innerHTML = content;
             break;
         default:
             content = "THIS IS A FEATURE";
+            inject.innerHTML = content;
     }
     
-    inject.innerHTML = content;
 }
 
 function feature1_inject(){
@@ -95,18 +111,6 @@ function feature1_inject(){
 
     });
     var content = '<canvas id="chartjs-4" class="chartjs" width="250" height="125" style="display: block; width: 250px; height: 125px;"></canvas>';
-    var ctx=document.getElementById("chartjs-4").getContext("2d")
-    var myChart= new Chart(ctx,
-    {"type":"doughnut",
-    "data":{
-      "labels":[
-        "Male","Female"],
-      "datasets":[{
-        "label":"My First Dataset",
-      "data":[150,50],"backgroundColor":[
-      "rgb(255, 99, 132)",
-      "rgb(54, 162, 235)",
-      "rgb(255, 205, 86)"]}]}});
-
+    
     return content;
 };
