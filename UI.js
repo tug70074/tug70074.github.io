@@ -140,7 +140,7 @@ function injectFunction(num){
                     console.log(data2);
                     var option = {
                         title: {
-                            text: 'Timeline Covid'
+                            text: 'Philly Covid Cases Timeline'
                         },
                         legend: {
                             data: ['Hospitlized', 'Not Hospitlized']
@@ -252,6 +252,9 @@ function injectFunction(num){
                                 type: 'shadow'      
                             }
                         },
+                        title: {
+                            text: 'Philly Covid Cases by Age'
+                        }, //bitter google
                         legend: {
                             data: ['Hospitalized', 'Not Hospitalized/Unknown']
                         },
@@ -319,37 +322,73 @@ function injectFunction(num){
                                 else 
                                     data2[0] = element.count;
                                 break;
-                            case "AMERICAN INDIAN":
+                            case "White":
                                 if (element.hospitalized.includes("Yes"))
                                     data1[1] = element.count;
                                 else 
                                     data2[1] = element.count;
                                 break;
-                            case "Asian":
-                                if (element.hospitalized.includes("Yes"))
-                                    data1[2] = element.count;
-                                else 
-                                    data2[2] = element.count;
+                            case "UNKNOWN":
+                                if (element.hospitalized.includes("Yes")) {
+                                    if (data1[2] != null)
+                                        data1[2] += element.count;
+                                    else
+                                        data1[2] = element.count
+                                }
+                                else {
+                                    if (data2[2] != null)
+                                        data2[2] += element.count;
+                                    else
+                                        data2[2] = element.count
+                                }
+                                break;
+                            case null:
+                                if (element.hospitalized.includes("Yes")) {
+                                    if (data1[2] != null)
+                                        data1[2] += element.count;
+                                    else
+                                        data1[2] = element.count
+                                }
+                                else {
+                                    if (data2[2] != null)
+                                        data2[2] += element.count;
+                                    else
+                                        data2[2] = element.count
+                                }
                                 break;
                             case "DECLINE":
+                                if (element.hospitalized.includes("Yes")) {
+                                    if (data1[2] != null)
+                                        data1[2] += element.count;
+                                    else
+                                        data1[2] = element.count
+                                }
+                                else {
+                                    if (data2[2] != null)
+                                        data2[2] += element.count;
+                                    else
+                                        data2[2] = element.count
+                                }
+                                break;
+                            case "HISPANIC":
                                 if (element.hospitalized.includes("Yes"))
                                     data1[3] = element.count;
                                 else 
                                     data2[3] = element.count;
                                 break;
-                            case "HISPANIC":
+                            case "OTHER":
                                 if (element.hospitalized.includes("Yes"))
                                     data1[4] = element.count;
                                 else 
                                     data2[4] = element.count;
                                 break;
-                            case "Native American":
+                            case "Asian":
                                 if (element.hospitalized.includes("Yes"))
                                     data1[5] = element.count;
                                 else 
                                     data2[5] = element.count;
                                 break;
-                            case "OTHER":
+                            case "Native American":
                                 if (element.hospitalized.includes("Yes"))
                                     data1[6] = element.count;
                                 else 
@@ -361,39 +400,11 @@ function injectFunction(num){
                                 else 
                                     data2[7] = element.count;
                                 break;
-                            case "UNKNOWN":
-                                if (element.hospitalized.includes("Yes")) {
-                                    if (data1[8] != null)
-                                        data1[8] += element.count;
-                                    else
-                                        data1[8] = element.count
-                                }
-                                else {
-                                    if (data2[8] != null)
-                                        data2[8] += element.count;
-                                    else
-                                        data2[8] = element.count
-                                }
-                                break;
-                            case "White":
+                            case "AMERICAN INDIAN":
                                 if (element.hospitalized.includes("Yes"))
-                                    data1[9] = element.count;
+                                    data1[8] = element.count;
                                 else 
-                                    data2[9] = element.count;
-                                break;
-                            case null:
-                                if (element.hospitalized.includes("Yes")) {
-                                    if (data1[8] != null)
-                                        data1[8] += element.count;
-                                    else
-                                        data1[8] = element.count
-                                }
-                                else {
-                                    if (data2[8] != null)
-                                        data2[8] += element.count;
-                                    else
-                                        data2[8] = element.count
-                                }
+                                    data2[8] = element.count;
                                 break;
                             default:
                                 break;
@@ -408,6 +419,9 @@ function injectFunction(num){
                             axisPointer: {          
                                 type: 'shadow'      
                             }
+                        },
+                        title: {
+                            text: 'Philly Covid Cases by Race'
                         },
                         backgroundColor: '#2c343c',
                         textStyle: {
@@ -430,7 +444,7 @@ function injectFunction(num){
                         },
                         yAxis: {
                             type: 'category',
-                            data: ['AFRICAN AMERICAN', 'AMERICAN INDIAN', 'Asian', 'DECLINE', 'HISPANIC', 'Native American', 'OTHER', 'Pacific Islander', 'UNKNOWN', 'White']
+                            data: ['AFRICAN AMERICAN', 'White','UNKNOWN', 'HISPANIC', 'OTHER','Asian','Native American','Pacific Islander','AMERICAN INDIAN']
                         },
                         series: [
                             {
