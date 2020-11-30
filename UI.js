@@ -56,8 +56,7 @@ function injectFunction(num){
             
             break;
         case 3:
-            content = "THIS IS A FEATURE";   
-            //content = Covid_RaceGraph_inject();
+            content = Covid_RaceGraph_inject();
             
             break;
         default:
@@ -215,7 +214,7 @@ function injectFunction(num){
                                 else 
                                     data2[0] = element.count;
                                 break;
-                            case "21-34":
+                            case "20-34":
                                 if (element.hospitalized.includes("Yes"))
                                     data1[1] = element.count;
                                 else 
@@ -267,7 +266,7 @@ function injectFunction(num){
                         },
                         yAxis: {
                             type: 'category',
-                            data: ['<20', '21-34', '35-54', '55-74', '75+']
+                            data: ['<20', '20-34', '35-54', '55-74', '75+']
                         },
                         series: [
                             {
