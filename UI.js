@@ -261,10 +261,10 @@ function injectFunction(num){
                             bottom: '3%',
                             containLabel: true
                         },
-                        xAxis: {
+                        yAxis: {
                             type: 'value'
                         },
-                        yAxis: {
+                        xAxis: {
                             type: 'category',
                             data: ['<20', '20-34', '35-54', '55-74', '75+']
                         },
@@ -414,6 +414,9 @@ function injectFunction(num){
                             color: 'rgba(255, 255, 255, 0.3)'
                         },
                         legend: {
+                            textStyle: {
+                                color: '0'
+                            },
                             data: ['Hospitalized', 'Not Hospitalized/Unknown']
                         },
                         grid: {
@@ -422,10 +425,10 @@ function injectFunction(num){
                             bottom: '3%',
                             containLabel: true
                         },
-                        yAxis: {
+                        xAxis: {
                             type: 'value'
                         },
-                        xAxis: {
+                        yAxis: {
                             type: 'category',
                             data: ['AFRICAN AMERICAN', 'AMERICAN INDIAN', 'Asian', 'DECLINE', 'HISPANIC', 'Native American', 'OTHER', 'Pacific Islander', 'UNKNOWN', 'White']
                         },
@@ -441,6 +444,9 @@ function injectFunction(num){
                                 data: data1
                             },
                             {
+                                itemStyle: {
+                                    color: '#a0cbc7'
+                                },
                                 name: 'Not Hospitalized/Unknown',
                                 type: 'bar',
                                 stack: 'total',
