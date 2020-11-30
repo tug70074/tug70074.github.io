@@ -56,7 +56,8 @@ function injectFunction(num){
             
             break;
         case 3:
-            content = "THIS IS TEST FEATURE 4";
+            content = "THIS IS A FEATURE";   
+            //content = Covid_RaceGraph_inject();
             
             break;
         default:
@@ -241,13 +242,6 @@ function injectFunction(num){
                             default:
                                 break;
                         }
-                        if (!xAxisData.includes(date) && (date != null)) //if the next row is the same date as previous but just
-                            xAxisData.push(date.substring(0,10));
-
-                        if (element.hospitalized === "Yes") 
-                            data1.push(element.count);
-                        else   
-                            data2.push(element.count)
                     });
                     console.log(data1);
                     console.log(data2);
@@ -328,6 +322,12 @@ function Covid_Timeline_inject(){//////////////////Look here to insert the pie c
 
 function Covid_AgeGraph_inject(){//////////////////Look here to insert the pie chart
     var content = '<div id="echarts-agegraph" style="width: 100%;height:400px;"></div>'; //fix width to be container
+   
+    return content;
+};
+
+function Covid_RaceGraph_inject(){//////////////////Look here to insert the pie chart
+    var content = '<div id="echarts-racegraph" style="width: 100%;height:400px;"></div>'; //fix width to be container
    
     return content;
 };
