@@ -211,33 +211,33 @@ function injectFunction(num){
                         switch (age) {
                             case "<20":
                                 if (element.hospitalized.includes("Yes"))
-                                    data1.push(element.count);
+                                    data1[0] = element.count;
                                 else 
-                                    data2.push(element.count)
+                                    data2[0] = element.count;
                                 break;
                             case "21-34":
                                 if (element.hospitalized.includes("Yes"))
-                                    data1.push(element.count);
+                                    data1[1] = element.count;
                                 else 
-                                    data2.push(element.count)
+                                    data2[1] = element.count;
                                 break;
                             case "35-54":
                                 if (element.hospitalized.includes("Yes"))
-                                    data1.push(element.count);
+                                    data1[2] = element.count;
                                 else 
-                                    data2.push(element.count)
+                                    data2[2] = element.count;
                                 break;
                             case "55-74":
                                 if (element.hospitalized.includes("Yes"))
-                                    data1.push(element.count);
+                                    data1[3] = element.count;
                                 else 
-                                    data2.push(element.count)
+                                    data2[3] = element.count;
                                 break;
                             case "75+":
                                 if (element.hospitalized.includes("Yes"))
-                                    data1.push(element.count);
+                                    data1[4] = element.count;
                                 else 
-                                    data2.push(element.count)
+                                    data2[4] = element.count;
                                 break;
                             default:
                                 break;
@@ -299,7 +299,108 @@ function injectFunction(num){
             
             break;
         case 3:
-            content = "THIS IS TEST FEATURE 4";
+            jQuery.ajax({ 
+                type: "GET", 
+                url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_age ORDER BY age", 
+                dataType: "json", 
+                success: function(data) {
+                    var rows = data.rows;
+                
+                    var timelineChart = echarts.init(document.getElementById("echarts-racegraph"));
+                    var xAxisData = [];
+                    var data1 = [];
+                    var data2 = [];
+                    console.log(data["rows"]);
+                    data["rows"].forEach(element => {
+                        var age = element.age;
+                        switch (age) {
+                            case "<20":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1[0] = element.count;
+                                else 
+                                    data2[0] = element.count;
+                                break;
+                            case "21-34":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1[1] = element.count;
+                                else 
+                                    data2[1] = element.count;
+                                break;
+                            case "35-54":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1[2] = element.count;
+                                else 
+                                    data2[2] = element.count;
+                                break;
+                            case "55-74":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1[3] = element.count;
+                                else 
+                                    data2[3] = element.count;
+                                break;
+                            case "75+":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1[4] = element.count;
+                                else 
+                                    data2[4] = element.count;
+                                break;
+                            default:
+                                break;
+                        }
+                    });
+                    console.log(data1);
+                    console.log(data2);
+
+                    option = {
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {          
+                                type: 'shadow'      
+                            }
+                        },
+                        legend: {
+                            data: ['Hospitalized', 'Not Hospitalized/Unknown']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'value'
+                        },
+                        yAxis: {
+                            type: 'category',
+                            data: ['<20', '20-34', '35-54', '55-74', '75+']
+                        },
+                        series: [
+                            {
+                                name: 'Hospitalized',
+                                type: 'bar',
+                                stack: 'total',
+                                label: {
+                                    show: true,
+                                    position: 'insideRight'
+                                },
+                                data: data1
+                            },
+                            {
+                                name: 'Not Hospitalized/Unknown',
+                                type: 'bar',
+                                stack: 'total',
+                                label: {
+                                    show: true,
+                                    position: 'insideRight'
+                                },
+                                data: data2
+                            }
+                        ]
+                    };
+
+                    timelineChart.setOption(option);
+                }
+            });
             
             break;
         default:
