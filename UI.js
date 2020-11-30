@@ -52,7 +52,7 @@ function injectFunction(num){
             
             break;
         case 2:
-            content = "THIS IS TEST FEATURE 3";
+            content = Covid_AgeGraph_inject();
             
             break;
         case 3:
@@ -193,7 +193,115 @@ function injectFunction(num){
             
             break;
         case 2:
-            content = "THIS IS TEST FEATURE 3";
+            jQuery.ajax({ 
+                type: "GET", 
+                url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_age ORDER BY age", 
+                dataType: "json", 
+                success: function(data) {
+                    var rows = data.rows;
+                
+                    var timelineChart = echarts.init(document.getElementById("echarts-agegraph"));
+                    var xAxisData = [];
+                    var data1 = [];
+                    var data2 = [];
+                    console.log(data["rows"]);
+                    data["rows"].forEach(element => {
+                        var age = element.age;
+                        switch (age) {
+                            case "<20":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1.push(element.count);
+                                else 
+                                    data2.push(element.count)
+                                break;
+                            case "21-34":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1.push(element.count);
+                                else 
+                                    data2.push(element.count)
+                                break;
+                            case "35-54":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1.push(element.count);
+                                else 
+                                    data2.push(element.count)
+                                break;
+                            case "55-74":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1.push(element.count);
+                                else 
+                                    data2.push(element.count)
+                                break;
+                            case "75+":
+                                if (element.hospitalized.includes("Yes"))
+                                    data1.push(element.count);
+                                else 
+                                    data2.push(element.count)
+                                break;
+                            default:
+                                break;
+                        }
+                        if (!xAxisData.includes(date) && (date != null)) //if the next row is the same date as previous but just
+                            xAxisData.push(date.substring(0,10));
+
+                        if (element.hospitalized === "Yes") 
+                            data1.push(element.count);
+                        else   
+                            data2.push(element.count)
+                    });
+                    console.log(data1);
+                    console.log(data2);
+
+                    option = {
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {          
+                                type: 'shadow'      
+                            }
+                        },
+                        legend: {
+                            data: ['Hospitalized', 'Not Hospitalized/Unknown']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'value'
+                        },
+                        yAxis: {
+                            type: 'category',
+                            data: ['<20', '20-34', '35-54', '55-74', '75+']
+                        },
+                        series: [
+                            {
+                                name: 'Hospitalized',
+                                type: 'bar',
+                                stack: 'total',
+                                label: {
+                                    show: true,
+                                    position: 'insideRight'
+                                },
+                                data: data1
+                            },
+                            {
+                                name: 'Not Hospitalized/Unknown',
+                                type: 'bar',
+                                stack: 'total',
+                                label: {
+                                    show: true,
+                                    position: 'insideRight'
+                                },
+                                data: data2
+                            }
+                        ]
+                    };
+
+                    timelineChart.setOption(option);
+                }
+            });
             
             break;
         case 3:
@@ -214,6 +322,12 @@ function Covid_Gender_inject(){//////////////////Look here to insert the pie cha
 
 function Covid_Timeline_inject(){//////////////////Look here to insert the pie chart
     var content = '<div id="echarts-timeline" style="width: 100%;height:400px;"></div>'; //fix width to be container
+   
+    return content;
+};
+
+function Covid_AgeGraph_inject(){//////////////////Look here to insert the pie chart
+    var content = '<div id="echarts-agegraph" style="width: 100%;height:400px;"></div>'; //fix width to be container
    
     return content;
 };
