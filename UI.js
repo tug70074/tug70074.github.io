@@ -154,9 +154,6 @@ function injectFunction(num){
                         toolbox: {
                             // y: 'bottom',
                             feature: {
-                                magicType: {
-                                    type: ['stack', 'tiled']
-                                },
                                 dataView: {}
                             }
                         },
@@ -195,7 +192,8 @@ function injectFunction(num){
                         ],
                         series: [{
                             name: 'Hospitalized',
-                            type: 'bar',
+                            type: 'line',
+                            smooth: true,
                             data: data1,
                             animationDelay: function (idx) {
                                 return idx * 10;
@@ -203,7 +201,8 @@ function injectFunction(num){
                         }, 
                         {
                             name: 'Not Hospitalized',
-                            type: 'bar',
+                            type: 'line',
+                            smooth: true,
                             data: data2,
                             animationDelay: function (idx) {
                                 return idx * 10;
