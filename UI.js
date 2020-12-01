@@ -122,6 +122,7 @@ function injectFunction(num){
                     var timelineChart = echarts.init(document.getElementById("echarts-timeline"));
                     var xAxisData = [];
                     var data1 = [];
+                    var data2 = [];
                     var i = 0;
                     data["rows"].forEach(element => {
                         var date = element.date;
@@ -138,10 +139,10 @@ function injectFunction(num){
                                 data1[i] = element.count
                         }
                         else {
-                            if (data1[i] != null)
-                                data1[i] += element.count;
+                            if (data2[i] != null)
+                                data2[i] += element.count;
                             else
-                                data1[i] = element.count
+                                data2[i] = element.count
                         }
 
                         i++;
@@ -159,6 +160,9 @@ function injectFunction(num){
                                 dataView: {}
                             }
                         },
+                        legend: {
+                            data: ['Hospitalized', 'Not Hospitalized']
+                        },
                         tooltip: {},
                         xAxis: {
                             data: xAxisData,
@@ -168,10 +172,39 @@ function injectFunction(num){
                         },
                         yAxis: {
                         },
+                        dataZoom: [
+                            {
+                                show: true,
+                                start: 94,
+                                end: 100
+                            },
+                            {
+                                type: 'inside',
+                                start: 94,
+                                end: 100
+                            },
+                            {
+                                show: true,
+                                yAxisIndex: 0,
+                                filterMode: 'empty',
+                                width: 30,
+                                height: '80%',
+                                showDataShadow: false,
+                                left: '93%'
+                            }
+                        ],
                         series: [{
-                            name: 'Hospitlized',
+                            name: 'Hospitalized',
                             type: 'bar',
                             data: data1,
+                            animationDelay: function (idx) {
+                                return idx * 10;
+                            }
+                        }, 
+                        {
+                            name: 'Not Hospitalized',
+                            type: 'bar',
+                            data: data2,
                             animationDelay: function (idx) {
                                 return idx * 10;
                             }
