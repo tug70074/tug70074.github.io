@@ -119,31 +119,32 @@ function injectFunction(num){
                 url: "https://phl.carto.com/api/v2/sql?q=SELECT * FROM covid_hospitalizations_by_date ORDER BY date", 
                 dataType: "json", 
                 success: function(data) {
-                    var rows = data.rows;
-                
                     var timelineChart = echarts.init(document.getElementById("echarts-timeline"));
                     var xAxisData = [];
                     var data1 = [];
-                    var data2 = [];
-                    console.log(data["rows"]);
+                    var i = 0;
                     data["rows"].forEach(element => {
                         var date = element.date;
                         if (!xAxisData.includes(date) && (date != null)) //if the next row is the same date as previous but just
-                            xAxisData.push(date.substring(0,10));
-
-                        if (element.hospitalized === "Yes") 
-                            data1.push(element.count);
-                        else   
-                            data2.push(element.count)
+                            xAxisData[i](date.substring(0,10));
+                        
+                        if (element.hospitalized.includes("Yes")) {
+                            if (data1[i] != null)
+                                data1[i] += element.count;
+                            else
+                                data1[i] = element.count
+                        }
+                        else {
+                            if (data1[i] != null)
+                                data1[i] += element.count;
+                            else
+                                data1[i] = element.count
+                        }
+                        i++; 
                     });
-                    console.log(data1);
-                    console.log(data2);
                     var option = {
                         title: {
                             text: 'Philly Covid Cases Timeline'
-                        },
-                        legend: {
-                            data: ['Hospitlized', 'Not Hospitlized']
                         },
                         toolbox: {
                             // y: 'bottom',
@@ -151,10 +152,7 @@ function injectFunction(num){
                                 magicType: {
                                     type: ['stack', 'tiled']
                                 },
-                                dataView: {},
-                                saveAsImage: {
-                                    pixelRatio: 2
-                                }
+                                dataView: {}
                             }
                         },
                         tooltip: {},
@@ -172,13 +170,6 @@ function injectFunction(num){
                             data: data1,
                             animationDelay: function (idx) {
                                 return idx * 10;
-                            }
-                        }, {
-                            name: 'Not Hospitlized',
-                            type: 'bar',
-                            data: data2,
-                            animationDelay: function (idx) {
-                                return idx * 10 + 100;
                             }
                         }],
                         animationEasing: 'elasticOut',
@@ -491,19 +482,19 @@ function Covid_Gender_inject(){//////////////////Look here to insert the pie cha
 };
 
 function Covid_Timeline_inject(){//////////////////Look here to insert the pie chart
-    var content = '<div id="echarts-timeline" style="width: 100%;height:400px;"></div>'; //fix width to be container
+    var content = '<div id="echarts-timeline" style="width: 100%;height:100%;"></div>'; //fix width to be container
    
     return content;
 };
 
 function Covid_AgeGraph_inject(){//////////////////Look here to insert the pie chart
-    var content = '<div id="echarts-agegraph" style="width: 100%;height:400px;"></div>'; //fix width to be container
+    var content = '<div id="echarts-agegraph" style="width: 100%;height:100%;"></div>'; //fix width to be container
    
     return content;
 };
 
 function Covid_RaceGraph_inject(){//////////////////Look here to insert the pie chart
-    var content = '<div id="echarts-racegraph" style="width: 100%;height:400px;"></div>'; //fix width to be container
+    var content = '<div id="echarts-racegraph" style="width: 100%;height:100%;"></div>'; //fix width to be container
    
     return content;
 };
