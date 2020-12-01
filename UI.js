@@ -126,26 +126,14 @@ function injectFunction(num){
                     var i = 0;
                     data["rows"].forEach(element => {
                         var date = element.date;
-                        if (!xAxisData.includes(date) && (date != null)) {
-                            xAxisData[i] = date.substring(0,10);
-                        } else { //we found a duplicate date, mostlikely need to add again
-                            i--;
+                        if (date != null) {
+                            if (element.hospitalized.includes("Yes")) {
+                                data1.push([date.substring(0,10), element.count]);
+                            }
+                            else {
+                                data2.push([date.substring(0,10), element.count]);
+                            }
                         }
-                        
-                        if (element.hospitalized.includes("Yes")) {
-                            if (data1[i] != null)
-                                data1[i] += element.count;
-                            else
-                                data1[i] = element.count
-                        }
-                        else {
-                            if (data2[i] != null)
-                                data2[i] += element.count;
-                            else
-                                data2[i] = element.count
-                        }
-
-                        i++;
                     });
                     var option = {
                         title: {
@@ -153,7 +141,11 @@ function injectFunction(num){
                         },
                         toolbox: {
                             // y: 'bottom',
+                            
                             feature: {
+                                magicType: {
+                                    type: ['stack', 'tiled']
+                                },
                                 dataView: {}
                             }
                         },
@@ -162,7 +154,6 @@ function injectFunction(num){
                         },
                         tooltip: {},
                         xAxis: {
-                            data: xAxisData,
                             splitLine: {
                                 show: false
                             }
@@ -192,8 +183,7 @@ function injectFunction(num){
                         ],
                         series: [{
                             name: 'Hospitalized',
-                            type: 'line',
-                            smooth: true,
+                            type: 'bar',
                             data: data1,
                             animationDelay: function (idx) {
                                 return idx * 10;
@@ -201,8 +191,7 @@ function injectFunction(num){
                         }, 
                         {
                             name: 'Not Hospitalized',
-                            type: 'line',
-                            smooth: true,
+                            type: 'bar',
                             data: data2,
                             animationDelay: function (idx) {
                                 return idx * 10;
