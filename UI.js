@@ -482,19 +482,19 @@ function Covid_Gender_inject(){//////////////////Look here to insert the pie cha
 };
 
 function Covid_Timeline_inject(){//////////////////Look here to insert the pie chart
-    var content = '<div id="echarts-timeline" style="width: 100%;height:100%;"></div>'; //fix width to be container
+    var content = '<div id="echarts-timeline" style="width: 100%;height:400px;"></div>'; //fix width to be container
    
     return content;
 };
 
 function Covid_AgeGraph_inject(){//////////////////Look here to insert the pie chart
-    var content = '<div id="echarts-agegraph" style="width: 100%;height:100%;"></div>'; //fix width to be container
+    var content = '<div id="echarts-agegraph" style="width: 100%;height:400px;"></div>'; //fix width to be container
    
     return content;
 };
 
 function Covid_RaceGraph_inject(){//////////////////Look here to insert the pie chart
-    var content = '<div id="echarts-racegraph" style="width: 100%;height:100%;"></div>'; //fix width to be container
+    var content = '<div id="echarts-racegraph" style="width: 100%;height:400px;"></div>'; //fix width to be container
    
     return content;
 };
