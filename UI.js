@@ -126,8 +126,9 @@ function injectFunction(num){
                     data["rows"].forEach(element => {
                         var date = element.date;
                         if (!xAxisData.includes(date) && (date != null)) {
-                            i++;
                             xAxisData[i] = date.substring(0,10);
+                        } else { //we found a duplicate date, mostlikely need to add again
+                            i--;
                         }
                         
                         if (element.hospitalized.includes("Yes")) {
@@ -142,6 +143,8 @@ function injectFunction(num){
                             else
                                 data1[i] = element.count
                         }
+
+                        i++;
                     });
                     var option = {
                         title: {
